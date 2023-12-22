@@ -16,11 +16,7 @@ public class BranchManager
 	private String branchId;
 	private String managerName;
 	private Integer managerExp;
-	//private String customerId;
 	
-/*
-	@OneToMany(mappedBy="manager")
-	private List<Customer> customer;
-	*/
+	
 
 }

@@ -15,7 +15,7 @@ public class Account
 	private String accountStatus;
 	private String accountType;
 	private Integer accountBalance;
-	//private Integer transactionId;
+	
 	
 	
 	
@@ -37,10 +37,6 @@ public class Account
     @JoinColumn(name = "customer_id")
     private Customer customer;
     
-    /*
-    @OneToMany()
-    private List<Transaction> transactions;
-    
-    */
+   
     
 }

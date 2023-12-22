@@ -15,7 +15,7 @@ public class Customer
 	private String customerName;
 	private Long customerContact;
 	private String customerAddress;
-	//private String accountNumber;
+	
 	
 	
 	

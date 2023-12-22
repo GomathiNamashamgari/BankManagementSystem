@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bank.model.BranchManager;
 import com.bank.service.BranchService;
 
+
 @RestController
 @RequestMapping("/branch")
 public class BranchController

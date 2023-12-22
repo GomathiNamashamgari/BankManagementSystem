@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bank.model.Customer;
 import com.bank.service.CustomerService;
 
+
 @RestController
 @RequestMapping("/customer")
 public class CustomerController 

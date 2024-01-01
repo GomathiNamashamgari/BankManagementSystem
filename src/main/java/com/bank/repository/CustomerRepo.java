@@ -1,12 +1,14 @@
 package com.bank.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.bank.model.Customer;
 
-public interface CustomerRepo extends JpaRepository<Customer,String>
+public interface CustomerRepo extends JpaRepository<Customer,Long>
 {
-	public Customer findByCustomerId(String id);
-	public Customer findByCustomerName(String cname);
-	public Customer findByCustomerContact(Long contact);
+
+	Optional<Customer> findById(Long customerId);
+	
 }

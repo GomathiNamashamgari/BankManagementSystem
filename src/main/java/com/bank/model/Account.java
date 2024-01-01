@@ -1,6 +1,10 @@
 package com.bank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -11,31 +15,34 @@ import lombok.Data;
 public class Account 
 {
 	@Id
-	private String accountNumber;
-	private String accountStatus;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long accountId;
+	private String bankName;
+	private double Balance;
 	private String accountType;
-	private Integer accountBalance;
 	
 	
-	
+	@ManyToOne
+    @JoinColumn(name = "customer_id")
+	@JsonIgnore
+    private Customer customer;
 	
 	// Method to deposit funds
-    public void deposit(int amount) {
-        this.accountBalance += amount;
+    public void deposit(double amount) {
+        this.Balance += amount;
     }
 
     // Method to withdraw funds
-    public boolean withdraw(int amount) {
-        if (this.accountBalance >= amount) {
-            this.accountBalance -= amount;
+    public boolean withdraw(double amount) {
+        if (this.Balance >= amount) {
+            this.Balance -= amount;
             return true; // Withdrawal successful
         }
         return false; // Insufficient funds
     }
+
     
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+  
     
    
     

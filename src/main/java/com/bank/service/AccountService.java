@@ -1,18 +1,14 @@
 package com.bank.service;
 
-import java.util.List;
-
 import com.bank.model.Account;
 
 public interface AccountService
 {
-	public Account getAccountDetails(String accountNumber);
-	public List<Account> getAccountDetails();
-	public String insertAccount(Account a);
-	public String update(Account a);
-	public String deleteAccount(String accountNumber);
-	public Account getByAccountNumber(String accountNumber);
+	Account getAccountById(Long accountId);
+
+	void deposit(Long accountId, double amount);
+
+	void withdraw(Long accountId, double amount);
 	
-	public String depositAmount(String accountNumber, int amount);
-	public String withdrawAmount(String accountNumber,int amount);
+	
 }

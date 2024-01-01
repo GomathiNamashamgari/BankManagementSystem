@@ -1,63 +1,56 @@
 package com.bank.service;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bank.model.Account;
 import com.bank.model.Transaction;
 import com.bank.repository.TransactionRepo;
+import com.banks.exception.AccountNotFoundException;
 
 @Service
-public class TransactionServiceImpl implements TransactionService
-{
-	@Autowired
-	TransactionRepo trepo;
-	
+public class TransactionServiceImpl implements TransactionService {
 
-	public TransactionServiceImpl(TransactionRepo trepo) {
-		super();
-		this.trepo = trepo;
-	}
+    @Autowired
+    private TransactionRepo transactionRepository;
 
-	@Override
-	public Transaction getTransactionDetails(Integer id) {
-		Optional<Transaction> t=trepo.findById(id);
-		Transaction t1=t.get();
-		return t1;
-	}
+    @Autowired
+    private AccountService accountService;
+    
+    @Override
+    public List<Transaction> getTransactionsByAccount(Long accountId) 
+    {
+        return transactionRepository.findByAccount_AccountId(accountId);
+    }
 
-	@Override
-	public List<Transaction> getTransactionDetails() {
-		List<Transaction> t=trepo.findAll();
-		return t;
-	}
+    @Override
+    public void recordDeposit(Long accountId, double amount) {
+        recordTransaction(accountId, amount, "DEPOSIT");
+    }
 
-	@Override
-	public String insertTransaction(Transaction t) {
-		trepo.save(t);
-		return "One record has been inserted into the Transaction Relation";
-	}
+    @Override
+    public void recordWithdrawal(Long accountId, double amount) {
+        recordTransaction(accountId, amount, "WITHDRAW");
+    }
 
-	@Override
-	public String updateTransaction(Transaction t) {
-		trepo.save(t);
-		return "One record has been updated into the Transaction Relation";
-	}
+    @Override
+    public void recordTransaction(Long accountId, double amount, String type) {
+        // Fetch the Account entity from the database
+        Account account = accountService.getAccountById(accountId);
 
-	@Override
-	public String deleteTransaction(Integer id) {
-		trepo.deleteById(id);
-		return "One record has been deleted..!";
-	}
-
-	@Override
-	public Transaction getByTransactionId(Integer id) {
-		Transaction transaction = trepo.findByTransactionId(id);
-		return transaction;
-	}
-
-	
-	
+        // Check if the account is found
+        if (account != null) {
+            Transaction transaction = new Transaction();
+            transaction.setAccount(account);
+            transaction.setAmount(amount);
+            transaction.setType(type);
+            transaction.setTimestamp(new Date());
+            transactionRepository.save(transaction);
+        } else {
+            throw new AccountNotFoundException("Account not found");
+        }
+    }
 }

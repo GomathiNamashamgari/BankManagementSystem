@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import com.bank.exception.AccountNotFoundException;
 import com.bank.model.Account;
 import com.bank.repository.AccountRepo;
-import com.banks.exception.AccountNotFoundException;
 
 
 @Service

@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bank.exception.AccountNotFoundException;
 import com.bank.model.Account;
 import com.bank.model.Transaction;
 import com.bank.repository.TransactionRepo;
-import com.banks.exception.AccountNotFoundException;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {

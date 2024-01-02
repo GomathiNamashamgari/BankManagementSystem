@@ -22,6 +22,9 @@ public class Customer
 	private Date dateofbirth;
 	private Long contact;
 	private String address;
+	private String city;
+	private String state;
+	private Integer pincode;
 	
 	
 	 @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)

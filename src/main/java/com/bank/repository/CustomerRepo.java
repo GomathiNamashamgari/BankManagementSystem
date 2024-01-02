@@ -10,5 +10,7 @@ public interface CustomerRepo extends JpaRepository<Customer,Long>
 {
 
 	Optional<Customer> findById(Long customerId);
+
+	Customer save(Long customerId);
 	
 }

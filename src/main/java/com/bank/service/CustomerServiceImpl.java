@@ -20,4 +20,17 @@ public class CustomerServiceImpl implements CustomerService
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
     }
 
+    @Override
+    public Customer update(Long customerId, Customer customer) {
+        Customer existingCustomer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        existingCustomer.setName(customer.getName());
+        existingCustomer.setDateofbirth(customer.getDateofbirth());
+        existingCustomer.setContact(customer.getContact());
+        existingCustomer.setAddress(customer.getAddress());
+        existingCustomer.setCity(customer.getCity());
+        existingCustomer.setState(customer.getState());
+        existingCustomer.setPincode(customer.getPincode());
+        return customerRepository.save(existingCustomer);
+    }
 }

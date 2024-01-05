@@ -20,6 +20,7 @@ public class Customer
 	private Long customerId;
 	private String name;
 	private Date dateofbirth;
+	private String email;
 	private Long contact;
 	private String address;
 	private String city;

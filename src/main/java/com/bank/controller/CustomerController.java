@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bank.model.Customer;
 import com.bank.service.CustomerService;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class CustomerController 
@@ -29,10 +29,6 @@ public class CustomerController
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
     
-    @PutMapping("/customer/update/{id}")
-    public ResponseEntity<Customer> update(@PathVariable("id") Long customerId, @RequestBody Customer customer) {
-        Customer updatedCustomer = customerService.update(customerId, customer);
-        return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
-    }
+   
 
 }

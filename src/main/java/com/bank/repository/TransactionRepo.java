@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.bank.model.Account;
 import com.bank.model.Transaction;
 
-public interface TransactionRepo extends JpaRepository<Transaction,Long>
+public interface TransactionRepo extends JpaRepository<Transaction,Integer>
 {
 	
 	List<Transaction> findByAccount_AccountId(Long accountId);

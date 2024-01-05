@@ -18,8 +18,13 @@ public class Account
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long accountId;
 	private String bankName;
+	private String branchArea;
+	private String branchCity;
+	private String branchState;
+	private String branchpincode;
+	private String managername;
 	private double Balance;
-	private String accountType;
+	private String type;
 	
 	
 	@ManyToOne

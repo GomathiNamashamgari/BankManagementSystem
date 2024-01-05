@@ -16,7 +16,7 @@ import com.bank.service.TransactionService;
 import com.bank.model.Account;
 import com.bank.model.Transaction;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class TransactionController {
@@ -25,8 +25,8 @@ public class TransactionController {
     private TransactionService transactionService;
 
     
-    @GetMapping("/transaction")
-    public ResponseEntity<List<Transaction>> getTransactionsByAccount(@RequestParam Long accountId) {
+    @GetMapping("/transaction/account/{accountId}")
+    public ResponseEntity<List<Transaction>> getTransactionsByAccount(@PathVariable Long accountId) {
         List<Transaction> transactions = transactionService.getTransactionsByAccount(accountId);
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }

@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.model.Account;
 import com.bank.service.AccountService;
 import com.bank.service.TransactionService;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class AccountController {
@@ -31,29 +30,29 @@ public class AccountController {
     private TransactionService transactionService;
 
     @GetMapping("/account/{accountId}")
-    public ResponseEntity<Account> getAccount(@PathVariable Long accountId) {
+    public ResponseEntity<Account> getAccount(@PathVariable ("accountId") Long accountId) {
         Account account = accountService.getAccountById(accountId);
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @PostMapping("/account/{accountId}/deposit")
-    public ResponseEntity<String> deposit(@PathVariable Long accountId, @RequestParam double amount) 
+    @PostMapping("/account/{accountId}/deposit/{amount}")
+    public ResponseEntity<String> deposit(@PathVariable ("accountId") Long accountId, @PathVariable ("amount") double amount) 
     {
         try 
         {
             accountService.deposit(accountId, amount);
-            return new ResponseEntity<>("Deposit successful", HttpStatus.OK);
+            return ResponseEntity.ok().body("{\"message\": \"Deposit successful\"}");
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/account/{accountId}/withdraw")
-    public ResponseEntity<String> withdraw(@PathVariable Long accountId, @RequestParam double amount) {
+    @PostMapping("/account/{accountId}/withdraw/{amount}")
+    public ResponseEntity<String> withdraw(@PathVariable ("accountId") Long accountId, @PathVariable ("amount") double amount) {
         try 
         {
             accountService.withdraw(accountId, amount);
-            return new ResponseEntity<>("Withdrawal successful", HttpStatus.OK);
+            return ResponseEntity.ok().body("{\"message\": \"Withdrawal successful\"}");
         } 
         catch (Exception e) 
         {

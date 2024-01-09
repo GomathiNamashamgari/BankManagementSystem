@@ -18,14 +18,14 @@ import com.bank.model.Transaction;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/transaction")
 public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
 
     
-    @GetMapping("/transaction/account/{accountId}")
+    @GetMapping("/account/{accountId}")
     public ResponseEntity<List<Transaction>> getTransactionsByAccount(@PathVariable Long accountId) {
         List<Transaction> transactions = transactionService.getTransactionsByAccount(accountId);
         return new ResponseEntity<>(transactions, HttpStatus.OK);

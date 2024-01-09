@@ -16,14 +16,14 @@ import com.bank.service.CustomerService;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/customer")
 public class CustomerController 
 {
 
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/customer/{customerId}")
+    @GetMapping("/{customerId}")
     public ResponseEntity<Customer> getCustomer(@PathVariable Long customerId) {
         Customer customer = customerService.getCustomerById(customerId);
         return new ResponseEntity<>(customer, HttpStatus.OK);

@@ -26,6 +26,9 @@ public class Account
 	private double Balance;
 	private String type;
 	
+	private Long fromAccountId;
+    private Long toAccountId;
+	
 	
 	@ManyToOne
     @JoinColumn(name = "customer_id")
